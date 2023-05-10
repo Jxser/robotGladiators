@@ -1,6 +1,7 @@
 let playerName = window.prompt("What is your robot's name?");
 let playerHealth = 100;
 let playerAttack = 10;
+let playerMoney = 10;
 
 // Logging multiple values
 
@@ -13,30 +14,46 @@ let enemyAttack = 12;
 let fight = function() {
     window.alert('Welcome to Robot Gladiators!')
 
+    let promptFight = window.prompt("Would you like to FIGHT or SKIP this fight? Enter 'FIGHT' or 'SKIP' to choose.")
 
-    // Subtract the value of playerAttack from the value of "enemyHealth" and use that result to update the value in the enemyHealth Variable"
+    if(promptFight === 'FIGHT' || promptFight === 'fight' || promptFight ===  'Fight') {
+        // Subtract playerattack from enemy health and log to console.
+            enemyHealth = enemyHealth - playerAttack
+            console.log(`${playerName} attacked ${enemyName}. ${enemyName} now has ${enemyHealth} health remaining.`)
 
-    enemyHealth = enemyHealth - playerAttack
-    console.log(`${playerName} attacked ${enemyName}. ${enemyName} now has ${enemyHealth} health remaining.`)
+        if (enemyHealth <= 0) {
+            window.alert(`${enemyName} has died.`)
+        } else {
+            window.alert(`${enemyName} still has ${enemyHealth} remaining.`)
+        }
+    
+        // subtract enemyAttack from playerHealth and log to console.
+            playerHealth = playerHealth - enemyAttack 
+            console.log(`${enemyName} attacked ${playerName}. ${playerName} now has ${playerHealth} health remaining.`)
+    
+        
+        // check player health
+    
+        if (playerHealth <= 0) {
+            window.alert(`${playerHealth} has died.`)
+        } else {
+            window.alert(`${playerName} still has ${playerHealth} remaining.`)
+        }
 
-    // Subtract the value from EnemyAttack from the value of PlayerHealth and use that result to update the value in the PlayerHealth variable"
-    playerHealth = playerHealth - enemyAttack 
-    // Log a resulting message to the console so we know it worked.
-    console.log(`${enemyName} attacked ${playerName}. ${playerName} now has ${playerHealth} health remaining.`)
+    //if player decides to skip
+    } else if (promptFight === 'SKIP' || promptFight === 'skip' || promptFight === 'Skip') {
+        // Confirm with player he wants to Skip
+        let confirmSkip = window.confirm('Are you sure you want to quit?')
 
-
-    if (playerHealth <= 0) {
-        window.alert(`${playerHealth} has died.`)
+        if(confirmSkip) {
+            window.alert(`${playerName} has decided to skip the fight. Lil pussy boi.`)
+            playerMoney = playerMoney - 2
+        } else {
+            fight()
+        }
     } else {
-        window.alert(`${playerName} still has ${playerHealth} remaining.`)
-    }
-
-
-    if (enemyHealth <= 0) {
-        window.alert(`${enemyName} has died.`)
-    } else {
-        window.alert(`${enemyName} still has ${enemyHealth} remaining.`)
-    }
+        window.alert('You need to choose a valid option. FIGHT or SKIP bitch.')
+    } 
 }
 
 fight()
